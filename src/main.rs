@@ -42,12 +42,18 @@ trait LlmClient: Send + Sync {
 
 /*────────────────────────── OpenAI o3 ─────────────────────────────*/
 struct OpenAi {
-    http: Arc<Client>,
-    key: Option<String>,
+    client: async_openai::Client<async_openai::config::OpenAIConfig>,
 }
 impl OpenAi {
-    fn new(http: Arc<Client>, key: Option<String>) -> Self {
-        Self { http, key }
+    fn new(api_key: Option<String>) -> Result<Self> {
+        // fall back to env var if no flag was provided
+        let cfg = match api_key {
+            Some(k) => async_openai::config::OpenAIConfig::new().with_api_key(k),
+            None => async_openai::config::OpenAIConfig::default(),
+        };
+        Ok(Self {
+            client: async_openai::Client::with_config(cfg),
+        })
     }
 }
 #[async_trait]
@@ -57,60 +63,22 @@ impl LlmClient for OpenAi {
     }
 
     async fn ask(&self, prompt: &str) -> Result<String> {
-        let key = self
-            .key
-            .as_deref()
-            .ok_or_else(|| anyhow!("OPENAI_API_KEY not provided"))?;
+        // ::chat().create_byot takes arbitrary JSON thanks to the `byot` feature
+        let req = serde_json::json!({
+            "model": "o3",
+            "messages": [
+                { "role":async_openai::types::Role::User, "content": prompt }
+            ],
+            "response_format": { "type": "text" },
+            "reasoning_effort": "medium"
+        });
 
-        #[derive(Serialize)]
-        struct Msg<'m> {
-            role: &'m str,
-            content: &'m str,
-        }
-        #[derive(Serialize)]
-        struct Req<'r> {
-            model: &'r str,
-            messages: Vec<Msg<'r>>,
-            max_tokens: u16,
-        }
-        #[derive(Deserialize)]
-        struct Resp {
-            choices: Vec<Choice>,
-        }
-        #[derive(Deserialize)]
-        struct Choice {
-            message: MsgOut,
-        }
-        #[derive(Deserialize)]
-        struct MsgOut {
-            content: String,
-        }
+        let resp: serde_json::Value = self.client.chat().create_byot(req).await?; //  [oai_citation:1‡Docs.rs](https://docs.rs/async-openai)
 
-        let req = Req {
-            model: "gpt-4o-mini",
-            messages: vec![Msg {
-                role: "user",
-                content: prompt,
-            }],
-            max_tokens: 1024,
-        };
-
-        let resp: Resp = self
-            .http
-            .post("https://api.openai.com/v1/chat/completions")
-            .bearer_auth(key)
-            .json(&req)
-            .send()
-            .await?
-            .error_for_status()?
-            .json()
-            .await?;
-
-        Ok(resp
-            .choices
-            .first()
-            .map(|c| c.message.content.clone())
-            .unwrap_or_default())
+        Ok(resp["choices"][0]["message"]["content"]
+            .as_str()
+            .unwrap_or("<no content>")
+            .to_owned())
     }
 }
 
@@ -157,7 +125,7 @@ impl LlmClient for Claude {
         }
 
         let req = Req {
-            model: "claude-4-sonnet-20240229",
+            model: "claude-opus-4-20250514",
             messages: vec![Msg {
                 role: "user",
                 content: prompt,
@@ -211,7 +179,6 @@ impl LlmClient for Gemini {
 
         #[derive(Serialize)]
         struct Part<'p> {
-            role: &'p str,
             text: &'p str,
         }
         #[derive(Serialize)]
@@ -232,14 +199,11 @@ impl LlmClient for Gemini {
         }
 
         let url = format!(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={}",
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-preview-05-06:generateContent?key={}",
             key
         );
         let req = Req {
-            contents: vec![Part {
-                role: "user",
-                text: prompt,
-            }],
+            contents: vec![Part { text: prompt }],
         };
 
         let resp: Resp = self
@@ -336,7 +300,7 @@ async fn main() -> Result<()> {
     /* 3 ▸ shared HTTP client + provider roster */
     let http = Arc::new(Client::builder().build()?);
     let providers: Vec<Box<dyn LlmClient>> = vec![
-        Box::new(OpenAi::new(http.clone(), cli.openai_key.clone())),
+        Box::new(OpenAi::new(cli.openai_key.clone())?),
         Box::new(Claude::new(http.clone(), cli.anthropic_key.clone())),
         Box::new(Gemini::new(http.clone(), cli.google_key.clone())),
         Box::new(DeepSeek::new(cli.deepseek_key.clone())),
