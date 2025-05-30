@@ -321,26 +321,83 @@ impl LlmClient for DeepSeek {
 }
 /*────────────────────────── Grok (stub) ──────────────────────────*/
 struct Grok {
-    key_present: bool,
+    http: Arc<Client>,
+    key: Option<String>,
 }
+
 impl Grok {
-    fn new(key: Option<String>) -> Self {
-        Self {
-            key_present: key.is_some(),
-        }
+    pub fn new(http: Arc<Client>, key: Option<String>) -> Self {
+        Self { http, key }
     }
 }
+
 #[async_trait]
 impl LlmClient for Grok {
     fn name(&self) -> &str {
-        "Grok"
+        "Grok 3"
     }
-    async fn ask(&self, _prompt: &str) -> Result<String> {
-        if self.key_present {
-            Err(anyhow!("Grok endpoint TBD"))
-        } else {
-            Err(anyhow!("GROK_API_KEY not provided"))
+
+    async fn ask(&self, prompt: &str) -> Result<String> {
+        let key = self.key.as_deref().ok_or_else(|| anyhow!("XAI_API_KEY not provided"))?;
+
+        /* --- request payload mirrors the official example --- */
+        #[derive(Serialize)]
+        struct Msg<'a> {
+            role: &'static str,
+            content: &'a str,
         }
+
+        #[derive(Serialize)]
+        struct Req<'a> {
+            model: &'static str,
+            messages: Vec<Msg<'a>>,
+            stream: bool,
+            temperature: f32,
+        }
+
+        let req = Req {
+            model: "grok-3-latest", // public Grok-3 slug
+            messages: vec![Msg {
+                role: "user",
+                content: prompt,
+            }],
+            stream: false,
+            temperature: 0.7,
+        };
+
+        /* --- fire & parse --- */
+        #[derive(Deserialize)]
+        struct Choice {
+            message: MsgOut,
+        }
+        #[derive(Deserialize)]
+        struct MsgOut {
+            content: String,
+        }
+        #[derive(Deserialize)]
+        struct Resp {
+            choices: Vec<Choice>,
+        }
+
+        let text = self
+            .http
+            .post("https://api.x.ai/v1/chat/completions")
+            .bearer_auth(key)
+            .json(&req)
+            .send()
+            .await?
+            .error_for_status()?
+            .text()
+            .await?;
+
+        let resp: Resp =
+            serde_json::from_str(&text).map_err(|err| format_serde_error::SerdeError::new(text.to_string(), err))?;
+
+        Ok(resp
+            .choices
+            .first()
+            .map(|c| c.message.content.trim().to_owned())
+            .unwrap_or_else(|| "<no content>".into()))
     }
 }
 
@@ -368,7 +425,7 @@ async fn main() -> Result<()> {
         Box::new(Claude::new(http.clone(), cli.anthropic_key.clone())),
         Box::new(Gemini::new(http.clone(), cli.google_key.clone())),
         Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
-        Box::new(Grok::new(cli.grok_key.clone())),
+        Box::new(Grok::new(http.clone(), cli.grok_key.clone())),
     ];
 
     /* 4 ▸ ask every model every prompt (concurrently) */
