@@ -177,17 +177,17 @@ impl LlmClient for Gemini {
             .as_deref()
             .ok_or_else(|| anyhow!("GOOGLE_API_KEY not provided"))?;
 
-        #[derive(Serialize)]
-        struct Text<'p> {
-            text: &'p str,
+        #[derive(Serialize, Deserialize)]
+        struct Text {
+            text: String,
+        }
+        #[derive(Serialize, Deserialize)]
+        struct Part {
+            parts: Vec<Text>,
         }
         #[derive(Serialize)]
-        struct Part<'p> {
-            parts: Vec<Text<'p>>,
-        }
-        #[derive(Serialize)]
-        struct Req<'r> {
-            contents: Vec<Part<'r>>,
+        struct Req {
+            contents: Vec<Part>,
         }
         #[derive(Deserialize)]
         struct Resp {
@@ -195,11 +195,7 @@ impl LlmClient for Gemini {
         }
         #[derive(Deserialize)]
         struct Cand {
-            content: Vec<Seg>,
-        }
-        #[derive(Deserialize)]
-        struct Seg {
-            text: String,
+            content: Vec<Part>,
         }
 
         let url = format!(
@@ -208,7 +204,9 @@ impl LlmClient for Gemini {
         );
         let req = Req {
             contents: vec![Part {
-                parts: vec![Text { text: prompt }],
+                parts: vec![Text {
+                    text: prompt.to_string(),
+                }],
             }],
         };
 
@@ -228,7 +226,7 @@ impl LlmClient for Gemini {
             .map(|c| {
                 c.content
                     .iter()
-                    .map(|seg| seg.text.as_str())
+                    .flat_map(|seg| seg.parts.iter().map(|p| p.text.as_str()))
                     .collect::<Vec<&str>>()
                     .join("")
             })
