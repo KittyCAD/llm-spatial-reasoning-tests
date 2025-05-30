@@ -2,8 +2,17 @@
 # Every string in the array is one prompt.
 
 prompts = [
-  "Object A is 24 mm horizontally and 46 mm vertically away; Object B is 6 in horizontally and 8 in vertically away. Which is closer, and by how much?",
-  "Slice a cube with a plane that passes through the mid-points of three mutually adjacent edges. What is the cross-section shape?",
-  "Fold a square sheet along its vertical centre line. Punch a single hole 1 cm from the top-left corner of the folded sheet. Unfold it—where are the holes relative to the original corners?"
+  "Imagine a block letter ‘F’. Rotate it 90° clockwise in the plane, then spin it 180° about the vertical axis (like turning a page). Draw the result in ASCII.",
+  "A point is at (2, 1, −3) in camera space. The camera is at (0, 0, 0) looking down −Z with a 90° FOV. What pixel row/column (in a 1920 × 1080 sensor) does the point project to?",
+  "Slice a cube with a plane that passes through the mid-points of three mutually adjacent edges. What shape is the cross-section?",
+  "Fold a square sheet along its vertical center line. Punch a hole 1 cm from the top-left corner of the folded sheet. Unfold it—where are the holes relative to the original corners?",
+  "Camera at (0,0,0) looks toward +Z. Wall #1 is a 4 m × 4 m square 10 m away. Wall #2 is a 2 m × 2 m square 5 m away, centered exactly in front of Wall #1. What percent of Wall #1’s area is visible?",
+  "A circular robot with radius 0.4 m must move from (0,0) to (6,0). There’s a 1 m-wide corridor whose centerline is the polyline (0,0)→(3,2)→(6,0). Can the robot stay inside the corridor the whole way?",
+  "Gripper frame G is rotated 30° about X relative to robot frame R. Tool frame T is rotated 45° about Y relative to G. Give me the 3 × 3 rotation matrix from T to R.",
+  "Here’s an unfolded net of six squares in a T-shape. When folded, which squares share an edge with the center square?",
+  "Is the right-hand rule still valid if you swap the Y and Z axes but leave X alone? Why / why not?",
+  "Object A is 15 cm away in X and 8 in away in Y. Object B is 120 mm away in X and 0.1 m in Y. Which is closer?",
+  "A torus and a coffee mug are homeomorphic. Name a continuous deformation that turns the mug into the torus without tearing or gluing.",
+  "You stand at (0,0,0) facing +Y. A mirror is the plane X = 3. Where will your reflection appear?"
 ]
 
