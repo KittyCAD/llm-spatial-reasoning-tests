@@ -178,8 +178,12 @@ impl LlmClient for Gemini {
             .ok_or_else(|| anyhow!("GOOGLE_API_KEY not provided"))?;
 
         #[derive(Serialize)]
-        struct Part<'p> {
+        struct Text<'p> {
             text: &'p str,
+        }
+        #[derive(Serialize)]
+        struct Part<'p> {
+            parts: Vec<Text<'p>>,
         }
         #[derive(Serialize)]
         struct Req<'r> {
@@ -203,7 +207,9 @@ impl LlmClient for Gemini {
             key
         );
         let req = Req {
-            contents: vec![Part { text: prompt }],
+            contents: vec![Part {
+                parts: vec![Text { text: prompt }],
+            }],
         };
 
         let resp: Resp = self
