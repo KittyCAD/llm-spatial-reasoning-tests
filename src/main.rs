@@ -236,29 +236,80 @@ impl LlmClient for Gemini {
 
 /*────────────────────── DeepSeek R1 (stub) ───────────────────────*/
 struct DeepSeek {
-    key_present: bool,
+    http: Arc<Client>,
+    key: Option<String>,
 }
+
 impl DeepSeek {
-    fn new(key: Option<String>) -> Self {
-        Self {
-            key_present: key.is_some(),
-        }
-    }
-}
-#[async_trait]
-impl LlmClient for DeepSeek {
-    fn name(&self) -> &str {
-        "DeepSeek R1"
-    }
-    async fn ask(&self, _prompt: &str) -> Result<String> {
-        if self.key_present {
-            Err(anyhow!("DeepSeek R1 endpoint TBD"))
-        } else {
-            Err(anyhow!("DEEPSEEK_API_KEY not provided"))
-        }
+    pub fn new(http: Arc<Client>, key: Option<String>) -> Self {
+        Self { http, key }
     }
 }
 
+#[async_trait]
+impl LlmClient for DeepSeek {
+    fn name(&self) -> &str {
+        "DeepSeek Reasoner"
+    }
+
+    async fn ask(&self, prompt: &str) -> Result<String> {
+        let key = self
+            .key
+            .as_deref()
+            .ok_or_else(|| anyhow!("DEEPSEEK_API_KEY not provided"))?;
+
+        /* ---- request payload: OpenAI-compatible schema ---- */
+        #[derive(Serialize)]
+        struct Msg<'a> {
+            role: &'static str,
+            content: &'a str,
+        }
+        #[derive(Serialize)]
+        struct Req<'a> {
+            model: &'static str,
+            messages: Vec<Msg<'a>>,
+        }
+
+        let req = Req {
+            model: "deepseek-reasoner", // reasoning model R1  [oai_citation:0‡DeepSeek API Docs](https://api-docs.deepseek.com/?utm_source=chatgpt.com)
+            messages: vec![Msg {
+                role: "user",
+                content: prompt,
+            }],
+        };
+
+        /* ---- fire & parse ---- */
+        #[derive(Deserialize)]
+        struct Choice {
+            message: MsgOut,
+        }
+        #[derive(Deserialize)]
+        struct MsgOut {
+            content: String,
+        }
+        #[derive(Deserialize)]
+        struct Resp {
+            choices: Vec<Choice>,
+        }
+
+        let resp: Resp = self
+            .http
+            .post("https://api.deepseek.com/chat/completions")
+            .bearer_auth(key)
+            .json(&req)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?;
+
+        Ok(resp
+            .choices
+            .first()
+            .map(|c| c.message.content.trim().to_owned())
+            .unwrap_or_else(|| "<no content>".into()))
+    }
+}
 /*────────────────────────── Grok (stub) ──────────────────────────*/
 struct Grok {
     key_present: bool,
@@ -307,7 +358,7 @@ async fn main() -> Result<()> {
         Box::new(OpenAi::new(cli.openai_key.clone())?),
         Box::new(Claude::new(http.clone(), cli.anthropic_key.clone())),
         Box::new(Gemini::new(http.clone(), cli.google_key.clone())),
-        Box::new(DeepSeek::new(cli.deepseek_key.clone())),
+        Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
         Box::new(Grok::new(cli.grok_key.clone())),
     ];
 
