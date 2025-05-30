@@ -73,7 +73,7 @@ impl LlmClient for OpenAi {
             "reasoning_effort": "medium"
         });
 
-        let resp: serde_json::Value = self.client.chat().create_byot(req).await?; //  [oai_citation:1‡Docs.rs](https://docs.rs/async-openai)
+        let resp: serde_json::Value = self.client.chat().create_byot(req).await?;
 
         Ok(resp["choices"][0]["message"]["content"]
             .as_str()
@@ -133,7 +133,7 @@ impl LlmClient for Claude {
             max_tokens: 1024,
         };
 
-        let resp: Resp = self
+        let text = self
             .http
             .post("https://api.anthropic.com/v1/messages")
             .header("x-api-key", key)
@@ -142,8 +142,11 @@ impl LlmClient for Claude {
             .send()
             .await?
             .error_for_status()?
-            .json()
+            .text()
             .await?;
+
+        let resp: Resp =
+            serde_json::from_str(&text).map_err(|err| format_serde_error::SerdeError::new(text.to_string(), err))?;
 
         let answer = resp
             .content
@@ -210,15 +213,18 @@ impl LlmClient for Gemini {
             }],
         };
 
-        let resp: Resp = self
+        let text = self
             .http
             .post(url)
             .json(&req)
             .send()
             .await?
             .error_for_status()?
-            .json()
+            .text()
             .await?;
+
+        let resp: Resp =
+            serde_json::from_str(&text).map_err(|err| format_serde_error::SerdeError::new(text.to_string(), err))?;
 
         Ok(resp
             .candidates
@@ -271,7 +277,7 @@ impl LlmClient for DeepSeek {
         }
 
         let req = Req {
-            model: "deepseek-reasoner", // reasoning model R1  [oai_citation:0‡DeepSeek API Docs](https://api-docs.deepseek.com/?utm_source=chatgpt.com)
+            model: "deepseek-reasoner", // reasoning model R1
             messages: vec![Msg {
                 role: "user",
                 content: prompt,
@@ -292,7 +298,7 @@ impl LlmClient for DeepSeek {
             choices: Vec<Choice>,
         }
 
-        let resp: Resp = self
+        let text = self
             .http
             .post("https://api.deepseek.com/chat/completions")
             .bearer_auth(key)
@@ -300,8 +306,11 @@ impl LlmClient for DeepSeek {
             .send()
             .await?
             .error_for_status()?
-            .json()
+            .text()
             .await?;
+
+        let resp: Resp =
+            serde_json::from_str(&text).map_err(|err| format_serde_error::SerdeError::new(text.to_string(), err))?;
 
         Ok(resp
             .choices
