@@ -1,0 +1,9 @@
+# You can add / remove / reorder freely.
+# Every string in the array is one prompt.
+
+prompts = [
+  "Object A is 24 mm horizontally and 46 mm vertically away; Object B is 6 in horizontally and 8 in vertically away. Which is closer, and by how much?",
+  "Slice a cube with a plane that passes through the mid-points of three mutually adjacent edges. What is the cross-section shape?",
+  "Fold a square sheet along its vertical centre line. Punch a single hole 1 cm from the top-left corner of the folded sheet. Unfold it—where are the holes relative to the original corners?"
+]
+
