@@ -44,3 +44,13 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 | 30 | Offset frame area (2-D) | 3 cm-wide path inside a 20 × 12 cm rectangle (like an inner frame). Compute path area and remaining central area. | Outer minus inner rectangle; adjust both dimensions. | [prompt 30](results/prompt_30.md) |
 | 31 | Circle-circle intersection | Two discs radius 4 cm, centers 6 cm apart. Find the area of their overlap (lens) to nearest 0.1 cm². | Uses segment-area formula with arccos; numeric heavy. | [prompt 31](results/prompt_31.md) |
 | 32 | Centroid & median (2-D) | Triangle (0,0), (8,0), (3,6): compute centroid and equation of median from (3,6). | Combines centroid averaging and point-slope line. | [prompt 32](results/prompt_32.md) |
+| 33 | 5-D Euclidean norm | I have a 5-dimensional point (2, −5, 10, 3, 2). What is the magnitude of this point? | Extends √(x²+y²+z²+i²+j²); easy to drop one term. | [prompt 33](results/prompt_33.md) |
+| 34 | 4-D single-axis rotation | A 4-D point (2, −5, 10, 3). Rotate it 90 ° about the z-axis. | Must treat rotation in x-y plane while z & i components behave correctly. | [prompt 34](results/prompt_34.md) |
+| 35 | 4-D Euclidean distance | In ℝ⁴ the points A (1, −2, 4, 0) and B (−3, 6, 1, 5). Find the exact distance. | Adds a fourth squared-difference term. | [prompt 35](results/prompt_35.md) |
+| 36 | Tesseract cross-section | 4-cube edge 2 sliced by x + y + z + w = 1. Describe the 3-D polyhedron & its volume. | Visualising a hyper-plane cut; volume of 3-D slice. | [prompt 36](results/prompt_36.md) |
+| 37 | 4→3 projection & scaling | Project (3, −1, 2, 5) onto w = 1, then scale by ½. Give final coords. | Orthographic drop of w, then uniform scale. | [prompt 37](results/prompt_37.md) |
+| 38 | Compound 4-D rotation | Give the 4×4 matrix for 15° in x-y then 30° in z-w (RH rule each). | Two independent plane rotations; sign/order pitfalls. | [prompt 38](results/prompt_38.md) |
+| 39 | Hyper-volume of 4-sphere | Hyper-volume of radius-7 4-sphere, in terms of π. | Uses V₄ = ½ π² r⁴; many forget the factor. | [prompt 39](results/prompt_39.md) |
+| 40 | 4-D constant-velocity motion | Start (0,0,0,0), v = (1, −2, 3, 4) u/s. Where after √3 s? | Vector-time product with radicals. | [prompt 40](results/prompt_40.md) |
+| 41 | Minkowski interval classification | Events P(5,3,4,0) & Q(10,9,7,2) in signature (−+++). Compute interval & classify. | Correct sign convention; decide time/space/light-like. | [prompt 41](results/prompt_41.md) |
+| 42 | Oriented 4-volume / determinant | Vectors a=(1,0,0,1), b=(0,1,0,1), c=(0,0,1,1), d=(1,1,1,1): find oriented 4-volume & handedness. | 4-D determinant; sign gives orientation. | [prompt 42](results/prompt_42.md) |

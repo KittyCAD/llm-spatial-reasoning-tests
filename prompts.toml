@@ -33,6 +33,17 @@ prompts = [
   "In the xy-plane, point P is (2, 5). Rotate P 120° counter-clockwise about the origin, then reflect across the x-axis. Where is P now?",
   "A 3 cm-wide path runs inside the boundary of a 20 cm × 12 cm rectangle, following the edges like an inner frame. Compute the area of the path and of the remaining central region.",
   "Two discs of radius 4 cm have centers 6 cm apart. Find the area of their intersection (the lens) to the nearest tenth of a square cm.",
-  "A triangle has vertices (0, 0), (8, 0), and (3, 6). Find the coordinates of its centroid and the equation of the median from the vertex (3, 6)."
+  "A triangle has vertices (0, 0), (8, 0), and (3, 6). Find the coordinates of its centroid and the equation of the median from the vertex (3, 6).",
+    "I have a 5-dimensional point (x, y, z, i, j) at (2, -5, 10, 3, 2). What is the magnitude of this point?",
+  "I have a 4-dimensional point (x, y, z, i) at (2, -5, 10, 3). Rotate this point 90 degrees about the z axis.",
+  "In ℝ⁴ the points A (1, −2, 4, 0) and B (−3, 6, 1, 5) are given. What is the Euclidean distance between A and B (exact value, not decimal)?",
+  "A 4-cube (tesseract) of edge 2 is sliced by the hyperplane  x + y + z + w = 1.  Describe the three-dimensional polyhedron that forms the cross-section and give its volume.",
+  "Project the 4-D point (3, −1, 2, 5) orthographically onto the hyperplane  w = 1, then scale the result by ½.  Give the final 3-D coordinates.",
+  "Give the 4 × 4 rotation matrix that first rotates 15° in the x-y plane and then 30° in the z-w plane (right-hand rule in each plane).",
+  "What is the hyper-volume of a 4-D sphere of radius 7?  Express the answer in terms of π.",
+  "A particle starts at (0, 0, 0, 0) and moves with constant 4-velocity  v = (1, −2, 3, 4) units/second.  Where is it after √3 seconds (exact coordinates)?",
+  "In Minkowski space with signature (− + + +), compute the invariant interval between events  P ( t = 5, x = 3, y = 4, z = 0 ) and  Q ( t = 10, x = 9, y = 7, z = 2 ).  Classify it as time-like, space-like, or light-like.",
+  "Four vectors in ℝ⁴ are  a = (1, 0, 0, 1),  b = (0, 1, 0, 1),  c = (0, 0, 1, 1),  d = (1, 1, 1, 1).  Compute the oriented 4-volume (determinant) of the parallelotope they span and state whether they form a right- or left-handed orientation."
+]
 ]
 
