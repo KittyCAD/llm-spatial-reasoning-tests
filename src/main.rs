@@ -198,7 +198,7 @@ impl LlmClient for Gemini {
         }
         #[derive(Deserialize)]
         struct Cand {
-            content: Vec<Part>,
+            content: Part,
         }
 
         let url = format!(
@@ -231,8 +231,9 @@ impl LlmClient for Gemini {
             .first()
             .map(|c| {
                 c.content
+                    .parts
                     .iter()
-                    .flat_map(|seg| seg.parts.iter().map(|p| p.text.as_str()))
+                    .map(|p| p.text.as_str())
                     .collect::<Vec<&str>>()
                     .join("")
             })
@@ -424,7 +425,7 @@ async fn main() -> Result<()> {
         Box::new(OpenAi::new(cli.openai_key.clone())?),
         Box::new(Claude::new(http.clone(), cli.anthropic_key.clone())),
         Box::new(Gemini::new(http.clone(), cli.google_key.clone())),
-        Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
+        //Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
         Box::new(Grok::new(http.clone(), cli.grok_key.clone())),
     ];
 
