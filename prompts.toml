@@ -45,5 +45,4 @@ prompts = [
   "In Minkowski space with signature (− + + +), compute the invariant interval between events  P ( t = 5, x = 3, y = 4, z = 0 ) and  Q ( t = 10, x = 9, y = 7, z = 2 ).  Classify it as time-like, space-like, or light-like.",
   "Four vectors in ℝ⁴ are  a = (1, 0, 0, 1),  b = (0, 1, 0, 1),  c = (0, 0, 1, 1),  d = (1, 1, 1, 1).  Compute the oriented 4-volume (determinant) of the parallelotope they span and state whether they form a right- or left-handed orientation."
 ]
-]
 
