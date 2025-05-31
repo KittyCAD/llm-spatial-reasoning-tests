@@ -465,7 +465,7 @@ async fn main() -> Result<()> {
         }
 
         // ----- write the buffer to results/prompt_<n>.txt -----
-        let file_path = out_dir.join(format!("prompt_{:02}.txt", idx + 1));
+        let file_path = out_dir.join(format!("prompt_{:02}.md", idx + 1));
         let mut f = fs::File::create(&file_path)?;
         f.write_all(file_buf.as_bytes())?;
         println!("📄  saved to {}\n", file_path.display());
