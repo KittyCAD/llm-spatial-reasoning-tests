@@ -52,7 +52,7 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 | 36 | Tesseract cross-section | 4-cube edge 2 sliced by x + y + z + w = 1. Describe the 3-D polyhedron & its volume. | Visualising a hyper-plane cut; volume of 3-D slice. | [prompt 36](results/prompt_36.md) | not evaluated yet |
 | 37 | 4→3 projection & scaling | Project (3, −1, 2, 5) onto w = 1, then scale by ½. Give final coords. | Orthographic drop of w, then uniform scale. | [prompt 37](results/prompt_37.md) | 🦖🎶♊️🐋🤖|
 | 38 | Compound 4-D rotation | Give the 4×4 matrix for 15° in x-y then 30° in z-w (RH rule each). | Two independent plane rotations; sign/order pitfalls. | [prompt 38](results/prompt_38.md) | 🦖🎶♊️🐋🤖|
-| 39 | Hyper-volume of 4-sphere | Hyper-volume of radius-7 4-sphere, in terms of π. | Uses V₄ = ½ π² r⁴; many forget the factor. | [prompt 39](results/prompt_39.md) | |
+| 39 | Hyper-volume of 4-sphere | Hyper-volume of radius-7 4-sphere, in terms of π. | Uses V₄ = ½ π² r⁴; many forget the factor. | [prompt 39](results/prompt_39.md) | 🦖🎶♊️🐋🤖 |
 | 40 | 4-D constant-velocity motion | Start (0,0,0,0), v = (1, −2, 3, 4) u/s. Where after √3 s? | Vector-time product with radicals. | [prompt 40](results/prompt_40.md) | |
 | 41 | Minkowski interval classification | Events P(5,3,4,0) & Q(10,9,7,2) in signature (−+++). Compute interval & classify. | Correct sign convention; decide time/space/light-like. | [prompt 41](results/prompt_41.md) | |
 | 42 | Oriented 4-volume / determinant | Vectors a=(1,0,0,1), b=(0,1,0,1), c=(0,0,1,1), d=(1,1,1,1): find oriented 4-volume & handedness. | 4-D determinant; sign gives orientation. | [prompt 42](results/prompt_42.md) | |
