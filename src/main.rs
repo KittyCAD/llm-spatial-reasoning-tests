@@ -451,7 +451,12 @@ async fn main() -> Result<()> {
         let mut futs = Vec::new();
         for p in &providers {
             let name = p.name().to_string();
-            let fut = async move { (name, p.ask(prompt).await) };
+            let fut = async move {
+                let start = std::time::Instant::now();
+                let res = p.ask(prompt).await;
+                let t = start.elapsed();
+                (name, res, t)
+            };
             futs.push(fut);
         }
 
@@ -460,16 +465,20 @@ async fn main() -> Result<()> {
 
         // ----- print to console & build a single text blob -----
         let mut file_buf = format!("# Prompt #{}: {}\n\n", idx + 1, prompt);
-        for (name, reply) in &results {
+        for (name, reply, t) in &results {
             match reply {
                 Ok(text) => {
-                    println!("── {} ──────────────────────────────────────", name);
+                    println!(
+                        "── {}  ({} secs) ──────────────────────────────────────",
+                        name,
+                        t.as_secs()
+                    );
                     println!("{}\n", text.trim());
-                    file_buf.push_str(&format!("## {name}\n{text}\n\n"));
+                    file_buf.push_str(&format!("## {name}  ({} secs)\n{text}\n\n", t.as_secs()));
                 }
                 Err(e) => {
                     eprintln!("!! {}: {}\n", name, e);
-                    file_buf.push_str(&format!("## {name}\nERROR: {e}\n\n"));
+                    file_buf.push_str(&format!("## {name}  ({} secs)\nERROR: {e}\n\n", t.as_secs()));
                 }
             }
         }
