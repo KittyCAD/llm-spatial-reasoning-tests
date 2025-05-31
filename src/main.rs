@@ -1,12 +1,12 @@
 //! llm-spatial-tester – compare several LLMs on geometry prompts
-//!
+use std::{fs, io::Write, sync::Arc};
+
 use anyhow::{Result, anyhow};
 use async_trait::async_trait;
 use clap::Parser;
 use futures::future::join_all;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use std::{fs, sync::Arc};
 
 /*───────────────────────────── CLI ────────────────────────────────*/
 #[derive(Parser)]
@@ -419,6 +419,10 @@ async fn main() -> Result<()> {
         return Err(anyhow!("{} contains no prompts", &cli.prompts));
     }
 
+    // Make sure the output directory exists.
+    let out_dir = std::path::Path::new("results");
+    fs::create_dir_all(out_dir)?;
+
     /* 3 ▸ shared HTTP client + provider roster */
     let http = Arc::new(Client::builder().build()?);
     let providers: Vec<Box<dyn LlmClient>> = vec![
@@ -441,15 +445,30 @@ async fn main() -> Result<()> {
             futs.push(fut);
         }
 
-        for (name, reply) in join_all(futs).await {
+        // collect into Vec<(name, result)>
+        let results = join_all(futs).await;
+
+        // ----- print to console & build a single text blob -----
+        let mut file_buf = String::new();
+        for (name, reply) in &results {
             match reply {
                 Ok(text) => {
                     println!("── {} ──────────────────────────────────────", name);
                     println!("{}\n", text.trim());
+                    file_buf.push_str(&format!("## {name}\n{text}\n\n"));
                 }
-                Err(e) => eprintln!("!! {}: {}\n", name, e),
+                Err(e) => {
+                    eprintln!("!! {}: {}\n", name, e);
+                    file_buf.push_str(&format!("## {name}\nERROR: {e}\n\n"));
+                }
             }
         }
+
+        // ----- write the buffer to results/prompt_<n>.txt -----
+        let file_path = out_dir.join(format!("prompt_{:02}.txt", idx + 1));
+        let mut f = fs::File::create(&file_path)?;
+        f.write_all(file_buf.as_bytes())?;
+        println!("📄  saved to {}\n", file_path.display());
     }
     Ok(())
 }
