@@ -2,13 +2,15 @@
 
 A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and we need a shape rotator.
 
-**Models included:**
+## Models tested
 
 - o3 🦖
 - Claude Opus 4 🎶
 - Gemini 2.5 Pro Preview ♊️
 - DeepSeek R1 🐋
 - Grok 3 🤖
+
+## Prompts tried
 
 | # | **Skill probed** | **Example prompt** | **Why it’s tricky** | **Result file** | **Who was right** |
 |----|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------------|---|
@@ -54,3 +56,20 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 | 40 | 4-D constant-velocity motion | Start (0,0,0,0), v = (1, −2, 3, 4) u/s. Where after √3 s? | Vector-time product with radicals. | [prompt 40](results/prompt_40.md) | |
 | 41 | Minkowski interval classification | Events P(5,3,4,0) & Q(10,9,7,2) in signature (−+++). Compute interval & classify. | Correct sign convention; decide time/space/light-like. | [prompt 41](results/prompt_41.md) | |
 | 42 | Oriented 4-volume / determinant | Vectors a=(1,0,0,1), b=(0,1,0,1), c=(0,0,1,1), d=(1,1,1,1): find oriented 4-volume & handedness. | 4-D determinant; sign gives orientation. | [prompt 42](results/prompt_42.md) | |
+| 43 | 2-D rotation + reflection | L-tetromino at (0,0)(1,0)(2,0)(2,1); rotate 270° CCW about origin, then reflect across y = x. List new coords ascending by x. | Combines large rotation with diagonal mirror—easy to drop a block. | [prompt 43](results/prompt_43.md) |
+| 44 | Cone cross-section scaling | Right cone (h 8 cm, r 3 cm) cut 3 cm below apex, plane ∥ base → What shape & area? | Needs similar-triangles scaling and area formula. | [prompt 44](results/prompt_44.md) |
+| 45 | Out-of-plane flip (ASCII) | Block letter “R”, flip 180° about horizontal in-plane axis. ASCII-draw result. | Forces mental 3-D flip; many confuse with vertical mirror. | [prompt 45](results/prompt_45.md) |
+| 46 | Arbitrary-axis 3-D rotation | Rotate P = (1,2,−4) 120° about ⟨1,1,1⟩ axis. Give exact coords. | Requires Rodrigues/homogeneous rotation math. | [prompt 46](results/prompt_46.md) |
+| 47 | Cube slice → polygon vertices | Unit cube, plane through (0,½,½), (½,0,½), (½,½,0). List resulting polygon’s vertices cyclically. | Identify 3-D intersection edges; yields regular hexagon cross-section. | [prompt 47](results/prompt_47.md) |
+| 48 | 4 → 3 projection + 2-D rotation | Project (7,−3,5,2) to w = 0; rotate 90° about z. Give final 3-D point. | Mixes hyper-projection with classic xy-plane spin. | [prompt 48](results/prompt_48.md) |
+| 49 | Rotational symmetry reasoning | Regular dodecagon, keep every 2nd vertex. What polygon results? Explain. | Needs n/2 rule → regular hexagon proof. | [prompt 49](results/prompt_49.md) |
+| 50 | Path buffer / Minkowski sum | Robot radius 0.5 m along polyline (0,0)→(2,1)→(4,1). Is 1 m-wide corridor enough? | Buffer polyline by radius and check narrowest segment. | [prompt 50](results/prompt_50.md) |
+| 51 | 3-D rotation of extrusion | Equilateral Δ side 6 cm extruded 10 cm (+z). Rotate prism 90° about y. New coords of (0,0,0). | Apply y-axis rotation to 3-D vertex; mixes extrusion + rotation. | [prompt 51](results/prompt_51.md) |
+| 52 | Spatial algorithm design | Two random L-tetrominoes on 4×4 grids. Outline algorithm (no reflection) to test rotational equivalence. | Meta-spatial reasoning, not brute enumeration. | [prompt 52](results/prompt_52.md) |
+
+### Methodology behind the prompts
+
+- **1–22** → 1-D & 2-D fundamentals
+- **23–32** → Advanced 2-D set
+- **33–42** → 4-D/5-D hyper-spatial
+- **43–52** → “Shape-rotator” mental-rotation specials

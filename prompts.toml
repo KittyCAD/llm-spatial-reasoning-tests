@@ -43,6 +43,16 @@ prompts = [
   "What is the hyper-volume of a 4-D sphere of radius 7?  Express the answer in terms of π.",
   "A particle starts at (0, 0, 0, 0) and moves with constant 4-velocity  v = (1, −2, 3, 4) units/second.  Where is it after √3 seconds (exact coordinates)?",
   "In Minkowski space with signature (− + + +), compute the invariant interval between events  P ( t = 5, x = 3, y = 4, z = 0 ) and  Q ( t = 10, x = 9, y = 7, z = 2 ).  Classify it as time-like, space-like, or light-like.",
-  "Four vectors in ℝ⁴ are  a = (1, 0, 0, 1),  b = (0, 1, 0, 1),  c = (0, 0, 1, 1),  d = (1, 1, 1, 1).  Compute the oriented 4-volume (determinant) of the parallelotope they span and state whether they form a right- or left-handed orientation."
+  "Four vectors in ℝ⁴ are  a = (1, 0, 0, 1),  b = (0, 1, 0, 1),  c = (0, 0, 1, 1),  d = (1, 1, 1, 1).  Compute the oriented 4-volume (determinant) of the parallelotope they span and state whether they form a right- or left-handed orientation.",
+    "You’re given an L-tetromino on a grid: blocks at (0,0), (1,0), (2,0), (2,1). Rotate the piece 270° counter-clockwise about the origin, then reflect across the line y = x. List the four new coordinates in ascending x order.",
+  "A solid right-circular cone (height 8 cm, base radius 3 cm) is sliced by a plane parallel to its base 3 cm below the apex. Name the resulting cross-section and give its area.",
+  "Take the block letter ‘R’. Rotate it 180° about a horizontal axis lying in its plane (not a vertical flip). ASCII-draw what you see.",
+  "Point P = (1, 2, −4). Rotate P 120° around the axis through the origin in direction ⟨1, 1, 1⟩ (right-hand rule). Give the exact coordinates.",
+  "A unit cube sits with one corner at the origin. A plane passes through (0,½,½), (½,0,½) and (½,½,0). List the polygon vertices produced, in cyclic order.",
+  "Orthographically project (7, −3, 5, 2) onto w = 0, then rotate the result 90° about the z-axis. State the final 3-D point.",
+  "Imagine a regular dodecagon. If you delete every second vertex and connect the remaining ones, what polygon results? Explain.",
+  "A robot’s footprint is a 0.5 m radius circle. It must travel along polyline (0,0)→(2,1)→(4,1). Is a corridor 1 m wide (measured centreline) sufficient for clearance?",
+  "An equilateral triangle of side 6 cm is extruded 10 cm in the +z direction. Rotate the prism 90° about the y-axis. Give the new coordinates of the vertex originally at (0,0,0).",
+  "Two identical L-tetrominoes are placed randomly on separate 4 × 4 grids. Provide an algorithmic recipe (in prose) that determines whether one can be rotated (no reflection) to match the other."
 ]
 
