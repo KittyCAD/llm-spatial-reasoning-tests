@@ -13,6 +13,16 @@ prompts = [
   "Is the right-hand rule still valid if you swap the Y and Z axes but leave X alone? Why / why not?",
   "Object A is 15 cm away in X and 8 in away in Y. Object B is 120 mm away in X and 0.1 m in Y. Which is closer?",
   "A torus and a coffee mug are homeomorphic. Name a continuous deformation that turns the mug into the torus without tearing or gluing.",
-  "You stand at (0,0,0) facing +Y. A mirror is the plane X = 3. Where will your reflection appear?"
+  "You stand at (0,0,0) facing +Y. A mirror is the plane X = 3. Where will your reflection appear?",
+    "A point starts at +7 cm. It slides −18 cm along the line. Where does it end up, and is it left or right of the origin?",
+  "Segment A spans [−3 m, +9 m]. Segment B spans [+4 m, +15 m]. What portion (in meters and as a percent of A) do they overlap?",
+  "Reflect the point x = −12 across the line x = +5. Where is the image?",
+  "Car X is at 0 km heading + direction at 90 km/h. Car Y is at +300 km heading − direction at 60 km/h. When and where do they meet?",
+  "Fold a 20 cm paper strip at the 14 cm mark so the ends align. After the fold, how far apart are the original 0 cm and 20 cm points?",
+  "Point A is 250 mm from the origin. Point B is 1 ft to the right of A. How far (in centimeters) is B from the origin?",
+  "Three points: P = −8, Q = 4, R = 10. Shift every point +13. Then sort them left→right with their new coordinates.",
+  "A robot occupies an interval 0.6 m wide centered at +2 m. An obstacle is a 0.4 m interval centered at +3 m. Do they collide?",
+  "Is the inequality  −2 < x ≤ 5 AND x > 3 equivalent to 3 < x ≤ 5? Explain.",
+  "Starting at −7, move right in steps of 5 until you pass +20. List every landing spot and state whether each is even or odd."
 ]
 

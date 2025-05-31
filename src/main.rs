@@ -449,7 +449,7 @@ async fn main() -> Result<()> {
         let results = join_all(futs).await;
 
         // ----- print to console & build a single text blob -----
-        let mut file_buf = String::new();
+        let mut file_buf = format!("# Prompt #{}: {}\n\n", idx + 1, prompt);
         for (name, reply) in &results {
             match reply {
                 Ok(text) => {

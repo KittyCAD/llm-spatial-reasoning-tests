@@ -1,1 +1,28 @@
 # llm-spatial-reasoning-tests
+
+A set of prompts for testing LLMs spatial reasoning.
+
+| # | **Skill probed** | **Example prompt** | **Why it’s tricky** |
+|----|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| 1 | Mental rotation | Imagine a block letter ‘F’. Rotate it 90 ° clockwise in the plane, then spin it 180 ° about the vertical axis (like turning a page). Draw the result in ASCII. | Two independent rotations plus left–right reversal. |
+| 2 | 3-D coordinate transforms | A point is at (2, 1, −3) in camera space. The camera is at (0, 0, 0) looking down −Z with a 90 ° FOV. What pixel row/column (in a 1920 × 1080 sensor) does the point project to? | Chains perspective math **and** pixel indexing. |
+| 3 | Cross-sections | Slice a cube with a plane that passes through the mid-points of three mutually adjacent edges. What shape is the cross-section? | Many LLMs guess triangle; it’s a **regular hexagon**. |
+| 4 | Folding / paper-punch | Fold a square sheet along its vertical center line. Punch a hole 1 cm from the top-left corner of the folded sheet. Unfold it—where are the holes relative to the original corners? | Combines mirroring with distance preservation. |
+| 5 | Occlusion & visibility | Camera at (0,0,0) looks toward +Z. Wall #1 is a 4 m × 4 m square 10 m away. Wall #2 is a 2 m × 2 m square 5 m away, centered in front of Wall #1. What percent of Wall #1’s area is visible? | Needs solid-angle reasoning and area ratios. |
+| 6 | Path-planning / collision | A circular robot with radius 0.4 m must move from (0,0) to (6,0). There’s a 1 m-wide corridor whose centerline is the polyline (0,0)→(3,2)→(6,0). Can the robot stay inside the corridor the whole way? | Must buffer corridor by robot radius and check clearance. |
+| 7 | Reference-frame concatenation | Gripper frame G is rotated 30 ° about X relative to robot frame R. Tool frame T is rotated 45 ° about Y relative to G. Give the 3 × 3 rotation matrix from T to R. | Classic robotics transform stack—easy to typo. |
+| 8 | Net identification | Here’s an unfolded net of six squares in a T-shape. When folded, which squares share an edge with the center square? | Requires mentally tucking flaps. |
+| 9 | Symmetry & chirality | Is the right-hand rule still valid if you swap the Y and Z axes but leave X alone? Why / why not? | Tests awareness of handedness parity. |
+| 10 | Mixed-unit Pythagorean | Object A is 15 cm away in X and 8 in away in Y. Object B is 120 mm away in X and 0.1 m in Y. Which is closer? | Unit juggling + Pythagoras. |
+| 11 | Topological reasoning | A torus and a coffee mug are homeomorphic. Name a continuous deformation that turns the mug into the torus without tearing or gluing. | Separates parroting from genuine genus-1 insight. |
+| 12 | Mirror-image deduction | You stand at (0,0,0) facing +Y. A mirror is the plane X = 3. Where will your reflection appear? | Needs plane-reflection formula. |
+| 13 | Signed translation (1-D) | A point starts at +7 cm. It slides −18 cm along the line. Where does it end up, and is it left or right of the origin? | Positive/negative offsets & verbal direction. |
+| 14 | Interval overlap & length | Segment A spans [−3 m, +9 m]. Segment B spans [+4 m, +15 m]. What portion (in meters and as a percent of A) do they overlap? | Requires max(min) overlap logic. |
+| 15 | 1-D mirror reflection | Reflect the point x = −12 across the line x = +5. Where is the image? | Uses formula x′ = 2c − x. |
+| 16 | Relative motion / chase | Car X is at 0 km heading + direction at 90 km/h. Car Y is at +300 km heading − direction at 60 km/h. When and where do they meet? | One-dimensional pursuit with signed velocities. |
+| 17 | Folding a strip | Fold a 20 cm paper strip at the 14 cm mark so the ends align. After the fold, how far apart are the original 0 cm and 20 cm points? | Distance halves only where folded—easy to mis-count. |
+| 18 | Unit conversion (1-D) | Point A is 250 mm from the origin. Point B is 1 ft to the right of A. How far is B from the origin in cm? | mm → cm → ft conversions chain. |
+| 19 | Ordering after shifts | Points P = −8, Q = 4, R = 10; shift +13. Sort them left→right with their new coordinates. | Must re-sort after translation. |
+| 20 | 1-D collision spacing | A robot occupies an interval 0.6 m wide centered at +2 m. An obstacle is a 0.4 m interval centered at +3 m. Do they collide? | Expand to half-widths & check interval overlap. |
+| 21 | Boolean interval logic | Is the inequality −2 < x ≤ 5 **and** x > 3 equivalent to 3 < x ≤ 5? Explain. | Symbolic simplification on a line. |
+| 22 | Discrete stepping & parity | Starting at −7, move right in steps of 5 until you pass +20. List every landing spot and state whether each is even or odd. | Loop logic plus parity—all 1-D. |
