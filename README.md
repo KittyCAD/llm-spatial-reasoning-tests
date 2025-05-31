@@ -1,6 +1,6 @@
 # llm-spatial-reasoning-tests
 
-A set of prompts for testing LLMs spatial reasoning.
+A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and we need a shape rotator.
 
 **Models included:**
 
