@@ -1,0 +1,53 @@
+on:
+  push:
+    paths:
+      - '**.rs'
+      - '*/Cargo.toml'
+      - 'Cargo.lock'
+      - .github/workflows/rustfmt.yml
+      - rustfmt.toml
+      - rust-toolchain
+  pull_request:
+    paths:
+      - '**.rs'
+      - '*/Cargo.toml'
+      - 'Cargo.lock'
+      - .github/workflows/rustfmt.yml
+      - rustfmt.toml
+      - rust-toolchain
+name: rustfmt
+jobs:
+  rustfmt:
+    name: rustfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install latest nightly
+        uses: oxidecomputer/actions-rs_toolchain@oxide/master
+        with:
+            components: rustfmt, clippy
+      - name: Cache cargo registry
+        uses: actions/cache@v4.2.3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ github.ref }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-registry-master
+      - name: Cache cargo index
+        uses: actions/cache@v4.2.3
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ github.ref }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-index-master
+      - name: Cache cargo build
+        uses: actions/cache@v4.2.3
+        with:
+          path: target
+          key: ${{ runner.os }}-cargo-build-target-${{ github.ref }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-build-target-master
+      - name: Run cargo fmt --check
+        run: |
+          cargo fmt -- --check
+        shell: bash

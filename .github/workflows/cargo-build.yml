@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.rs'
+      - Cargo.toml
+      - Cargo.lock
+      - .github/workflows/cargo-build.yml
+      - 'rust-toolchain'
+      - 'rust-toolchain.toml'
+  pull_request:
+    paths:
+      - '**.rs'
+      - Cargo.toml
+      - Cargo.lock
+      - .github/workflows/cargo-build.yml
+      - 'rust-toolchain'
+      - 'rust-toolchain.toml'
+name: cargo build
+jobs:
+  cargobuild:
+    name: cargo build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install latest rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2.7.8
+      - name: Run cargo build
+        run: |
+          cargo build --locked
+        shell: bash
