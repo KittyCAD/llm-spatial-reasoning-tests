@@ -1,8 +1,10 @@
 # Prompt #58: A 4×2 rectangle lies flat on the xy-plane. It is tilted 30° toward you (rotation about the x-axis). Draw a simple 2-line ASCII perspective of the resulting trapezoid (front edge vs. back edge).
 
 ## OpenAI o3  (12 secs)
+```
 +--------+      (front edge)
   +------+      (back edge, raised & slightly foreshortened)
+```
 
 ## Claude 4 Sonnet  (5 secs)
 Looking at a 4×2 rectangle tilted 30° toward you (rotation about the x-axis), here's the ASCII perspective view:
