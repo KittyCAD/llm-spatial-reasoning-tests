@@ -69,7 +69,8 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 
 ### Methodology behind the prompts
 
-- **1–22** → 1-D & 2-D fundamentals
+- **1-12** → 3D space
+- **13–22** → 1-D & 2-D fundamentals
 - **23–32** → Advanced 2-D set
 - **33–42** → 4-D/5-D hyper-spatial
 - **43–52** → “Shape-rotator” mental-rotation specials
