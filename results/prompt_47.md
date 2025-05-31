@@ -81,7 +81,7 @@ The intersection polygon is a hexagon with vertices (in cyclic order):
 - (
 
 ## Gemini Pro  (0 secs)
-ERROR: HTTP status server error (500 Internal Server Error) for url (https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-preview-05-06:generateContent?key=AIzaSyAYYQQw2Gf6sl01rpMFLesvsGoDxIh3_Mg)
+ERROR: HTTP status server error (500 Internal Server Error) for url (https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-preview-05-06:generateContent?)
 
 ## DeepSeek Reasoner  (279 secs)
 The plane \(x + y + z = 1\) intersects the unit cube with vertices from (0,0,0) to (1,1,1). The intersection points with the cube's edges occur only at the corners (1,0,0), (0,1,0), and (0,0,1), forming a triangular polygon.
