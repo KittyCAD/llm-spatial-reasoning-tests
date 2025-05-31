@@ -1,9 +1,11 @@
 # Prompt #59: ASCII T-shape made of 5 blocks: center at (2,2) with arms (1,2)(2,2)(3,2)(2,1)(2,0). Rotate 180° in-plane and translate +4 in x. Print the new grid (width ≥ 8).
 
 ## OpenAI o3  (19 secs)
+```
 ..#.....
 ..#.....
 .###....
+```
 
 ## Claude 4 Sonnet  (12 secs)
 I need to rotate the T-shape 180° around its center (2,2) and then translate it +4 in x direction.
