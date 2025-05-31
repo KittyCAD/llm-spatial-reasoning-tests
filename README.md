@@ -2,6 +2,8 @@
 
 A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and we need a shape rotator.
 
+**TLDR;** the LLMs are great at math in N-dimensions (we tested 1, 2, 3, 4, & 5). **BUT** when it stops being raw math and starts getting physical, they start to break down.
+
 ## Models tested
 
 - o3 🦖
