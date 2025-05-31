@@ -429,7 +429,7 @@ async fn main() -> Result<()> {
         Box::new(OpenAi::new(cli.openai_key.clone())?),
         Box::new(Claude::new(http.clone(), cli.anthropic_key.clone())),
         Box::new(Gemini::new(http.clone(), cli.google_key.clone())),
-        //Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
+        Box::new(DeepSeek::new(http.clone(), cli.deepseek_key.clone())),
         Box::new(Grok::new(http.clone(), cli.grok_key.clone())),
     ];
 
