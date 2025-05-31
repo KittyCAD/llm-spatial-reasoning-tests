@@ -435,6 +435,16 @@ async fn main() -> Result<()> {
 
     /* 4 ▸ ask every model every prompt (concurrently) */
     for (idx, prompt) in prompts.iter().enumerate() {
+        // Skip the prompt if we already have a result file for it.
+        let file_path = out_dir.join(format!("prompt_{:02}.md", idx + 1));
+        if file_path.exists() {
+            println!(
+                "Skipping prompt #{}: already exists at {}",
+                idx + 1,
+                file_path.display()
+            );
+            continue;
+        }
         println!("\n════════════════════════════════════════════════════");
         println!("PROMPT #{}:\n{}\n", idx + 1, prompt);
 
@@ -464,8 +474,6 @@ async fn main() -> Result<()> {
             }
         }
 
-        // ----- write the buffer to results/prompt_<n>.txt -----
-        let file_path = out_dir.join(format!("prompt_{:02}.md", idx + 1));
         let mut f = fs::File::create(&file_path)?;
         f.write_all(file_buf.as_bytes())?;
         println!("📄  saved to {}\n", file_path.display());

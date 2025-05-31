@@ -23,6 +23,16 @@ prompts = [
   "Three points: P = −8, Q = 4, R = 10. Shift every point +13. Then sort them left→right with their new coordinates.",
   "A robot occupies an interval 0.6 m wide centered at +2 m. An obstacle is a 0.4 m interval centered at +3 m. Do they collide?",
   "Is the inequality  −2 < x ≤ 5 AND x > 3 equivalent to 3 < x ≤ 5? Explain.",
-  "Starting at −7, move right in steps of 5 until you pass +20. List every landing spot and state whether each is even or odd."
+  "Starting at −7, move right in steps of 5 until you pass +20. List every landing spot and state whether each is even or odd.",
+    "Two squares, each 4 cm by 4 cm, share a single corner so their interiors don’t overlap. Draw the composite outline and state its total perimeter.",
+  "A right-triangle has legs 9 m and 12 m. A circle is inscribed (touching all three sides). What is the circle’s radius?",
+  "Starting at (0,0), a robot walks 10 m east, then 10 m north, then 10 m west, then 10 m south. What is the net displacement, and what closed-shape was traced?",
+  "Rectangle R spans (−3,−1) to (7,6). Another rectangle S is R translated by the vector (−4,−2). What are S’s corner coordinates, and how much do R and S overlap in area?",
+  "A regular hexagon of side 5 cm is circumscribed by a circle. What is the circle’s radius, and what fraction of its area lies outside the hexagon?",
+  "Fold a square paper 16 cm on a side along its main diagonal. Punch a hole 2 cm from the fold and 5 cm from one short edge. After unfolding, mark all hole locations.",
+  "In the xy-plane, point P is (2, 5). Rotate P 120° counter-clockwise about the origin, then reflect across the x-axis. Where is P now?",
+  "A 3 cm-wide path runs inside the boundary of a 20 cm × 12 cm rectangle, following the edges like an inner frame. Compute the area of the path and of the remaining central region.",
+  "Two discs of radius 4 cm have centers 6 cm apart. Find the area of their intersection (the lens) to the nearest tenth of a square cm.",
+  "A triangle has vertices (0, 0), (8, 0), and (3, 6). Find the coordinates of its centroid and the equation of the median from the vertex (3, 6)."
 ]
 
