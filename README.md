@@ -2,6 +2,14 @@
 
 A set of prompts for testing LLMs spatial reasoning.
 
+**Models included:**
+
+- o3
+- Claude Opus 4
+- Gemini 2.5 Pro Preview
+- DeepSeek R1
+- Grok 3
+
 | # | **Skill probed** | **Example prompt** | **Why it’s tricky** | **Result file** |
 |----|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------------|
 | 1 | Mental rotation | Imagine a block letter ‘F’. Rotate it 90 ° clockwise in the plane, then spin it 180 ° about the vertical axis (like turning a page). Draw the result in ASCII. | Two independent rotations plus left–right reversal. | [prompt 01](results/prompt_01.md) |
