@@ -3,10 +3,12 @@
 ## OpenAI o3
 Here’s the block you get after the two moves (spaces are empty cells):
 
+```
 #####
 # #  
 # #  
 #    
+```
 
 ## Claude 4 Sonnet
 Let me work through this step by step.
