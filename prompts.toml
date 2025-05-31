@@ -53,6 +53,14 @@ prompts = [
   "Imagine a regular dodecagon. If you delete every second vertex and connect the remaining ones, what polygon results? Explain.",
   "A robot’s footprint is a 0.5 m radius circle. It must travel along polyline (0,0)→(2,1)→(4,1). Is a corridor 1 m wide (measured centreline) sufficient for clearance?",
   "An equilateral triangle of side 6 cm is extruded 10 cm in the +z direction. Rotate the prism 90° about the y-axis. Give the new coordinates of the vertex originally at (0,0,0).",
-  "Two identical L-tetrominoes are placed randomly on separate 4 × 4 grids. Provide an algorithmic recipe (in prose) that determines whether one can be rotated (no reflection) to match the other."
+  "Two identical L-tetrominoes are placed randomly on separate 4 × 4 grids. Provide an algorithmic recipe (in prose) that determines whether one can be rotated (no reflection) to match the other.",
+  "Draw a block letter 'G' on a fixed-width grid. Now rotate it 90° clockwise **in-plane** and THEN reflect it across the vertical mid-line of the grid. Provide the final ASCII drawing.",
+  "Imagine the capital letter 'E' cut from cardboard. Flip it 180° about a **horizontal axis** (toward you like a somersault). ASCII-draw what you see afterward.",
+  "ASCII box: corners (0,0),(5,0),(5,3),(0,3). First apply the shear x' = x + 0.5·y, then rotate the shape 90° counter-clockwise. Sketch the final outline in ASCII.",
+  "An ASCII 6×6 square has an 'O' hole at coordinate (1,4). Reflect the entire square (with hole) across the line y = x and show the result.",
+  "Take an L-tetromino footprint ((0,0)(1,0)(2,0)(2,1)). Extrude it 3 layers deep toward +z and then rotate the 3-D solid 90° about the y-axis. Provide three ASCII layers (z = 0,1,2) of the rotated solid.",
+  "A 4×2 rectangle lies flat on the xy-plane. It is tilted 30° toward you (rotation about the x-axis). Draw a simple 2-line ASCII perspective of the resulting trapezoid (front edge vs. back edge).",
+  "ASCII T-shape made of 5 blocks: center at (2,2) with arms (1,2)(2,2)(3,2)(2,1)(2,0). Rotate 180° in-plane and translate +4 in x. Print the new grid (width ≥ 8).",
+  "ASCII spiral: '@' at (0,0), '#' at (1,0), '$' at (1,1), '%' at (0,1). Unwind the spiral by rotating those four points 90° CCW about the square’s center. Output the new 2×2 grid."
 ]
 

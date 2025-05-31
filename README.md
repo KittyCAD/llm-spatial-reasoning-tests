@@ -68,6 +68,14 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 | 50 | Path buffer / Minkowski sum | Robot radius 0.5 m along polyline (0,0)→(2,1)→(4,1). Is 1 m-wide corridor enough? | Buffer polyline by radius and check narrowest segment. | [prompt 50](results/prompt_50.md) |
 | 51 | 3-D rotation of extrusion | Equilateral Δ side 6 cm extruded 10 cm (+z). Rotate prism 90° about y. New coords of (0,0,0). | Apply y-axis rotation to 3-D vertex; mixes extrusion + rotation. | [prompt 51](results/prompt_51.md) |
 | 52 | Spatial algorithm design | Two random L-tetrominoes on 4×4 grids. Outline algorithm (no reflection) to test rotational equivalence. | Meta-spatial reasoning, not brute enumeration. | [prompt 52](results/prompt_52.md) |
+| 53 | Mirror-vs-rotation (ASCII) | Block letter “G”: rotate 90° CW, then mirror across vertical axis. Draw final glyph. | Rotation-plus-mirror decoy; many swap the order. | [prompt 53](results/prompt_53.md) |
+| 54 | Out-of-plane flip (ASCII) | Cardboard “E” flipped 180° about horizontal axis. ASCII-draw result. | Requires 3-D mental flip, not 2-D mirror. | [prompt 54](results/prompt_54.md) |
+| 55 | Shear + rotation outline | Shear x' = x + 0.5y on 5×3 box, then rotate 90° CCW; ASCII outline. | Compound linear transform (shear then rotate). | [prompt 55](results/prompt_55.md) |
+| 56 | Diagonal mirror with punch | 6×6 ASCII square with hole (1,4); reflect across y = x; draw. | Forces mapping of interior point through diagonal mirror. | [prompt 56](results/prompt_56.md) |
+| 57 | 3-D L-tetromino layers | Extrude L-tetromino 3 layers, rotate 90° about y; show z = 0,1,2 ASCII layers. | Mixes extrusion with axis rotation, then layer-by-layer depiction. | [prompt 57](results/prompt_57.md) |
+| 58 | Perspective trapezoid sketch | Tilt 4×2 rectangle 30° toward viewer (x-axis); draw 2-line ASCII trapezoid. | Simplified 3-D → 2-D projection; requires foreshortening. | [prompt 58](results/prompt_58.md) |
+| 59 | T-shape rotate + translate | Rotate T-shape 180° in-plane, move +4 in x; render on ≥8-wide grid. | Combines rotation with translation & grid re-layout. | [prompt 59](results/prompt_59.md) |
+| 60 | Spiral unwind (ASCII) | Four-symbol spiral rotated 90° CCW about center; output new 2×2 grid. | Tiny but tests correct center-of-rotation handling. | [prompt 60](results/prompt_60.md) |
 
 ### Methodology behind the prompts
 
@@ -76,3 +84,4 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 - **23–32** → Advanced 2-D set
 - **33–42** → 4-D/5-D hyper-spatial
 - **43–52** → “Shape-rotator” mental-rotation specials
+- **53-60** → “Shape-rotator” ASCII specials
