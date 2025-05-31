@@ -1,8 +1,10 @@
 # Prompt #60: ASCII spiral: '@' at (0,0), '#' at (1,0), '$' at (1,1), '%' at (0,1). Unwind the spiral by rotating those four points 90° CCW about the square’s center. Output the new 2×2 grid.
 
 ## OpenAI o3  (13 secs)
+```
 %@
 $#
+```
 
 ## Claude 4 Sonnet  (7 secs)
 I need to rotate the 2×2 grid 90° counterclockwise about its center.
