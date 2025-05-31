@@ -3,18 +3,21 @@
 ## OpenAI o3  (40 secs)
 ASCII cross-sections after the 90° y-rotation  
 (‘#’ = solid, ‘.’ = empty)
-
+```
 z = 0
 ...
 ###
-
+```
+```
 z = 1
 ...
 ###
-
+```
+```
 z = 2
 ###
 ###
+```
 
 ## Claude 4 Sonnet  (12 secs)
 I need to work through this step-by-step.
