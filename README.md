@@ -77,7 +77,7 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 | 57 | 3-D L-tetromino layers | Extrude L-tetromino 3 layers, rotate 90° about y; show z = 0,1,2 ASCII layers. | Mixes extrusion with axis rotation, then layer-by-layer depiction. | [prompt 57](results/prompt_57.md) | not evaluated yet |
 | 58 | Perspective trapezoid sketch | Tilt 4×2 rectangle 30° toward viewer (x-axis); draw 2-line ASCII trapezoid. | Simplified 3-D → 2-D projection; requires foreshortening. | [prompt 58](results/prompt_58.md) | not evaluated yet |
 | 59 | T-shape rotate + translate | Rotate T-shape 180° in-plane, move +4 in x; render on ≥8-wide grid. | Combines rotation with translation & grid re-layout. | [prompt 59](results/prompt_59.md) | not evaluated yet |
-| 60 | Spiral unwind (ASCII) | Four-symbol spiral rotated 90° CCW about center; output new 2×2 grid. | Tiny but tests correct center-of-rotation handling. | [prompt 60](results/prompt_60.md) |
+| 60 | Spiral unwind (ASCII) | Four-symbol spiral rotated 90° CCW about center; output new 2×2 grid. | Tiny but tests correct center-of-rotation handling. | [prompt 60](results/prompt_60.md) | not evaluated yet |
 
 ### Methodology behind the prompts
 
