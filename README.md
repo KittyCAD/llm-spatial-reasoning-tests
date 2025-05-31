@@ -12,7 +12,7 @@ A set of prompts for testing LLMs spatial reasoning. The LLMs are wordcels and w
 - DeepSeek R1 🐋
 - Grok 3 🤖
 
-**Note:** results marked as `not evaluated yet` means we have not fully read thru the answers yet to find the winners
+**Note:** results marked as `not evaluated yet` means we have not fully read thru the answers yet to find the winners, make a PR with your updates and reasoning if you did!
 
 ## Prompts tried
 
