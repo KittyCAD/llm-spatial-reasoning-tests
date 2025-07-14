@@ -28,7 +28,7 @@ jobs:
           override: true
           components: rustfmt, clippy
       - name: Rust Cache
-        uses: Swatinem/rust-cache@v2.7.8
+        uses: Swatinem/rust-cache@v2.8.0
       - name: cargo test
         shell: bash
         run: |
