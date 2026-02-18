@@ -21,7 +21,7 @@ jobs:
     name: rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install latest nightly
         uses: oxidecomputer/actions-rs_toolchain@oxide/master
         with:
