@@ -60,9 +60,9 @@ checksum = "7f202df86484c868dbad7eaa557ef785d5c66295e41b460ef922eca0723b842c"
 
 [[package]]
 name = "async-openai"
-version = "0.36.1"
+version = "0.38.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dafa6acfa9d5138539abe815de90b0a4b7127420e6846c71bb23cf68660641ba"
+checksum = "322adbd4772f41a55fd30c10b924a30cf557ce65bbe7ebacda5a068404645604"
 dependencies = [
  "async-openai-macros",
  "getrandom 0.3.3",
@@ -73,9 +73,9 @@ dependencies = [
 
 [[package]]
 name = "async-openai-macros"
-version = "0.1.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81872a8e595e8ceceab71c6ba1f9078e313b452a1e31934e6763ef5d308705e4"
+checksum = "492a944774207eed3acf425214eadbd6ce84a2b89331164ff1c11bae92b26302"
 dependencies = [
  "proc-macro2",
  "quote",
