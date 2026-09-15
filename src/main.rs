@@ -67,7 +67,7 @@ impl LlmClient for OpenAi {
         let req = serde_json::json!({
             "model": "o3",
             "messages": [
-                { "role":async_openai::types::Role::User, "content": prompt }
+                { "role":async_openai::types::chat::Role::User, "content": prompt }
             ],
             "response_format": { "type": "text" },
             "reasoning_effort": "medium"
